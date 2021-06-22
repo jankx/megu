@@ -1366,7 +1366,7 @@ if ( ! class_exists( 'Mega_Menu' ) ) :
 
 	}
 
-	add_action( 'plugins_loaded', array( 'Mega_Menu', 'init' ), 10 );
+	add_action( 'after_setup_theme', array( 'Mega_Menu', 'init' ), 5 );
 
 endif;
 
