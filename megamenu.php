@@ -360,10 +360,17 @@ if ( ! class_exists( 'Mega_Menu' ) ) :
 		 */
 		private function define_constants() {
 			define( 'MEGAMENU_VERSION', $this->version );
-			define( 'MEGAMENU_BASE_URL', trailingslashit( plugins_url( 'megamenu' ) ) );
-			define( 'MEGAMENU_PATH', plugin_dir_path( __FILE__ ) );
-		}
+			define( 'MEGAMENU_PATH', dirname( __FILE__ ) . '/' );
 
+			define(
+				'MEGAMENU_BASE_URL',
+				str_replace(
+					trailingslashit(ABSPATH),
+					site_url('/'),
+					trailingslashit(MEGAMENU_PATH)
+				)
+			);
+		}
 
 		/**
 		 * All Mega Menu classes

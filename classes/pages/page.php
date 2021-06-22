@@ -153,7 +153,7 @@ if ( ! class_exists( 'Mega_Menu_Page' ) ) :
 					</div>
 				</div>
 
-				<?php 
+				<?php
 					if ( isset( $_GET['debug'] ) ) {
 						echo "<textarea style='width: 100%; height: 400px;'>";
 						var_dump( get_option("megamenu_settings") );
