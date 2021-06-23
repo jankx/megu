@@ -316,9 +316,9 @@ if ( ! class_exists( 'Mega_Menu_Style_Manager' ) ) :
 					'mobile_menu_item_background_hover_to' => 'menu_item_background_hover_to',
 					'mobile_menu_off_canvas_width'         => '300px',
 					'disable_mobile_toggle'                => 'off',
-					'custom_css'                           => '/** Push menu onto new line **/ 
-#{$wrap} { 
-    clear: both; 
+					'custom_css'                           => '/** Push menu onto new line **/
+#{$wrap} {
+    clear: both;
 }',
 				)
 			);
