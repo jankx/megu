@@ -21,6 +21,6 @@ class Megu
         if (!defined('JANKX_MEGA_MENU_ROOT')) {
             define('JANKX_MEGA_MENU_ROOT', dirname(__DIR__));
         }
-        require_once sprintf('%s/wp-megamenu.php', JANKX_MEGA_MENU_ROOT);
+        require_once sprintf('%s/megamenu.php', JANKX_MEGA_MENU_ROOT);
     }
 }
