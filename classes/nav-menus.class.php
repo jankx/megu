@@ -19,7 +19,7 @@ if ( ! class_exists( 'Mega_Menu_Nav_Menus' ) ) :
 
 			$defaults = array(
 				'type'                    => 'flyout',
-				'align'                   => 'bottom-left',
+				'align'                   => 'bottom-right',
 				'icon'                    => 'disabled',
 				'hide_text'               => 'false',
 				'disable_link'            => 'false',
