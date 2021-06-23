@@ -1,7 +1,7 @@
 <?php
-namespace Jankx\MegaMenu;
+namespace Jankx\Megu;
 
-class MegaMenu
+class Megu
 {
     protected static $instance;
 
@@ -21,6 +21,6 @@ class MegaMenu
         if (!defined('JANKX_MEGA_MENU_ROOT')) {
             define('JANKX_MEGA_MENU_ROOT', dirname(__DIR__));
         }
-        require_once sprintf('%s/megamenu.php', JANKX_MEGA_MENU_ROOT);
+        require_once sprintf('%s/wp-megamenu.php', JANKX_MEGA_MENU_ROOT);
     }
 }
