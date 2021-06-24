@@ -13,8 +13,8 @@ class VerticalMenu extends Extension
     public function execute()
     {
         add_action('megamenu_settings_table', array($this, 'addOrientationSetting'), 10, 2);
-        add_filter('megamenu_nav_menu_args', array( $this, 'appendVerticalCss'), 10, 3);
 
+        add_filter('megamenu_nav_menu_args', array( $this, 'appendVerticalCss'), 10, 3);
         add_filter('megamenu_load_scss_file_contents', array($this, 'verticalScssContent'));
     }
 
@@ -66,7 +66,10 @@ class VerticalMenu extends Extension
 
     public function verticalScssContent($scss)
     {
-        $contents = '';
+        $contents = file_get_contents(
+            sprintf('%s/assets/scss/vertical.scss', JANKX_MEGU_ROOT)
+        );
+
         return $scss . $contents;
     }
 }
