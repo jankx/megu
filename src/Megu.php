@@ -44,6 +44,9 @@ class Megu
                 continue;
             }
             static::$extensions[$extensionObj->getName()] = $extensionObj;
+
+            // Execute the extension
+            $extensionObj->execute();
         }
     }
 
