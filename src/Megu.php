@@ -26,10 +26,10 @@ class Megu
 
     protected function bootstrap()
     {
-        if (!defined('JANKX_MEGA_MENU_ROOT')) {
-            define('JANKX_MEGA_MENU_ROOT', dirname(__DIR__));
+        if (!defined('JANKX_MEGU_ROOT')) {
+            define('JANKX_MEGU_ROOT', dirname(__DIR__));
         }
-        require_once sprintf('%s/megamenu.php', JANKX_MEGA_MENU_ROOT);
+        require_once sprintf('%s/megamenu.php', JANKX_MEGU_ROOT);
     }
 
     public function loadExtensions()
