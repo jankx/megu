@@ -9,4 +9,8 @@ class VerticalMenu extends Extension
     {
         return 'vertical';
     }
+
+    public function execute()
+    {
+    }
 }

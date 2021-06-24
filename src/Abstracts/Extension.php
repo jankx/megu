@@ -10,7 +10,7 @@ abstract class Extension implements ExtensionConstract
      *
      * Default do not run any actions
      */
-    protected function execute()
+    public function execute()
     {
     }
 }
