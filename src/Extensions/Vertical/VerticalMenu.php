@@ -16,6 +16,9 @@ class VerticalMenu extends Extension
 
         add_filter('megamenu_nav_menu_args', array( $this, 'appendVerticalCss'), 10, 3);
         add_filter('megamenu_load_scss_file_contents', array($this, 'verticalScssContent'));
+
+        add_filter('megamenu_wrap_attributes', array( $this, 'applyAccordionAttributes'), 9, 5);
+        add_filter('megamenu_nav_menu_css_class', array( $this, 'accordionKeepParentsOpen' ), 10, 3);
     }
 
     public function addOrientationSetting($location, $settings)
@@ -71,5 +74,50 @@ class VerticalMenu extends Extension
         );
 
         return $scss . $contents;
+    }
+
+    public function applyAccordionAttributes($attributes, $menu_id, $menu_settings, $settings, $current_theme_location)
+    {
+        if (isset($menu_settings['orientation']) && $menu_settings['orientation'] == 'accordion') {
+            $attributes['data-document-click'] = 'disabled';
+        }
+
+        return $attributes;
+    }
+
+    public function accordionKeepParentsOpen($classes, $item, $args)
+    {
+        if (is_object($args) && strpos($args->menu_class, 'mega-menu-accordion') !== false) {
+            $settings = get_option('megamenu_settings');
+
+            $location = $args->theme_location;
+
+            if (isset($settings[$location]['accordion_behaviour']) && $settings[$location]['accordion_behaviour'] == 'open_parents' || ! isset($settings[$location]['accordion_behaviour'])) {
+                if (in_array('mega-menu-item-has-children', $classes)) {
+                    $needles = apply_filters('megamenu_accordion_parent_classes', array(
+                        'mega-current_page_ancestor',
+                        'mega-current_page_item',
+                        'mega-current-menu-ancestor',
+                        'mega-current-menu-item',
+                        'mega-current-menu-parent'
+                    ));
+
+                    $parent_is_current = array_intersect($needles, $classes);
+
+                    if (! empty($parent_is_current)) {
+                        $classes[] = 'mega-toggle-on';
+                    }
+                }
+            }
+
+
+            if (isset($settings[$location]['accordion_behaviour']) && $settings[$location]['accordion_behaviour'] == 'open_all') {
+                if (in_array('mega-menu-item-has-children', $classes)) {
+                    $classes[] = 'mega-toggle-on';
+                }
+            }
+        }
+
+        return $classes;
     }
 }
