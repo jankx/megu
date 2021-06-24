@@ -1,5 +1,5 @@
 <?php
-namespace Jankx\Megu\Extension\Vertical;
+namespace Jankx\Megu\Extensions\Vertical;
 
 use Jankx\Megu\Abstracts\Extension;
 
