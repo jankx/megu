@@ -19,6 +19,10 @@ class VerticalMenu extends Extension
 
         add_filter('megamenu_wrap_attributes', array( $this, 'applyAccordionAttributes'), 9, 5);
         add_filter('megamenu_nav_menu_css_class', array( $this, 'accordionKeepParentsOpen' ), 10, 3);
+
+        if (apply_filters('jankx_megu_enable_vertical_menu_item', false)) {
+            add_filter('jankx_site_layout_menu_items', array($this, 'registerVerticalMenuItem'));
+        }
     }
 
     public function addOrientationSetting($location, $settings)
@@ -119,5 +123,11 @@ class VerticalMenu extends Extension
         }
 
         return $classes;
+    }
+
+    public function registerVerticalMenuItem($items) {
+        $item['vertical_menu_item'] = __('Vertical Menu', 'jankx_megu');
+
+        return $items;
     }
 }
