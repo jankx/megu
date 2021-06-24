@@ -22,6 +22,7 @@ class VerticalMenu extends Extension
 
         if (apply_filters('jankx_megu_enable_vertical_menu_item', false)) {
             add_filter('jankx_site_layout_menu_items', array($this, 'registerVerticalMenuItem'));
+            add_filter('nav_menu_item_title', array($this, 'renderVerticalMenuItem'), 10, 4);
         }
     }
 
@@ -125,9 +126,28 @@ class VerticalMenu extends Extension
         return $classes;
     }
 
-    public function registerVerticalMenuItem($items) {
-        $item['vertical_menu_item'] = __('Vertical Menu', 'jankx_megu');
+    public function registerVerticalMenuItem($items)
+    {
+        $items['vertical_menu_item'] = __('Vertical Menu', 'jankx_megu');
 
         return $items;
+    }
+
+    public function renderVerticalMenuItem($item_title, $item, $args, $depth)
+    {
+        if ($item->type !== 'vertical_menu_item') {
+            return $item_title;
+        }
+
+        $menu_location = apply_filters('jankx_megu_vertical_menu_item', null, $item, $args);
+        if (is_null($menu_location)) {
+            return $item_title;
+        }
+
+        $args->link_after = sprintf('%s%s', jankx_component('nav', array(
+            'theme_location' => $menu_location,
+        ), false), $args->link_after);
+
+        return $item_title;
     }
 }
