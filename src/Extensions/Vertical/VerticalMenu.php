@@ -12,6 +12,11 @@ class VerticalMenu extends Extension
 
     public function execute()
     {
+        add_action('wp', array($this, 'init'));
+    }
+
+    public function init()
+    {
         add_action('megamenu_settings_table', array($this, 'addOrientationSetting'), 10, 2);
 
         add_filter('megamenu_nav_menu_args', array( $this, 'appendVerticalCss'), 10, 3);
@@ -22,7 +27,9 @@ class VerticalMenu extends Extension
 
         if (apply_filters('jankx_megu_enable_vertical_menu_item', false)) {
             add_filter('jankx_site_layout_menu_items', array($this, 'registerVerticalMenuItem'));
-            add_filter('nav_menu_item_title', array($this, 'renderVerticalMenuItem'), 10, 4);
+            if (!apply_filters('jankx_megu_enable_custom_vertical_menu', false)) {
+                add_filter('nav_menu_item_title', array($this, 'renderVerticalMenuItem'), 10, 4);
+            }
         }
     }
 
