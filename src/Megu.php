@@ -1,8 +1,9 @@
 <?php
 namespace Jankx\Megu;
 
-use Jankx\Megu\Extensions\Vertical\VerticalMenu;
 use Jankx\Megu\Constracts\Extension;
+use Jankx\Megu\Extensions\Vertical\VerticalMenu;
+use Jankx\Megu\Extensions\IconFonts\ThemeIconFonts;
 
 class Megu
 {
@@ -36,6 +37,7 @@ class Megu
     {
         $extensions = apply_filters('jankx_megu_extensions', array(
             VerticalMenu::class,
+            ThemeIconFonts::class,
         ));
 
         foreach ($extensions as $extension) {
