@@ -12,13 +12,12 @@ class VerticalMenu extends Extension
 
     public function execute()
     {
+        add_action('admin_init', array($this, 'admin'));
         add_action('wp', array($this, 'init'));
     }
 
     public function init()
     {
-        add_action('megamenu_settings_table', array($this, 'addOrientationSetting'), 10, 2);
-
         add_filter('megamenu_nav_menu_args', array( $this, 'appendVerticalCss'), 10, 3);
         add_filter('megamenu_load_scss_file_contents', array($this, 'verticalScssContent'));
 
@@ -31,6 +30,11 @@ class VerticalMenu extends Extension
                 add_filter('nav_menu_item_title', array($this, 'renderVerticalMenuItem'), 10, 4);
             }
         }
+    }
+
+    public function admin()
+    {
+        add_action('megamenu_settings_table', array($this, 'addOrientationSetting'), 10, 2);
     }
 
     public function addOrientationSetting($location, $settings)

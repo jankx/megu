@@ -294,11 +294,11 @@ if ( ! class_exists( 'Mega_Menu_Nav_Menus' ) ) :
 
 				$submitted_settings = apply_filters( 'megamenu_submitted_settings_meta', $submitted_settings );
 
-				if ( ! get_option( 'megamenu_settings' ) ) {
+				$existing_settings = get_option( 'megamenu_settings' );
+
+				if ( ! $existing_settings ) {
 					update_option( 'megamenu_settings', $submitted_settings );
 				} else {
-					$existing_settings = get_option( 'megamenu_settings' );
-
 					foreach ( $submitted_settings as $location => $settings ) {
 						if ( isset( $existing_settings[ $location ] ) ) {
 							$existing_settings[ $location ] = array_merge( $existing_settings[ $location ], $settings );
@@ -585,7 +585,6 @@ if ( ! class_exists( 'Mega_Menu_Nav_Menus' ) ) :
 					</select>
 				</td>
 			</tr>
-
 				<?php do_action( 'megamenu_settings_table', $location, $settings ); ?>
 		</table>
 			<?php
