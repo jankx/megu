@@ -1372,7 +1372,11 @@ if ( ! class_exists( 'Mega_Menu' ) ) :
 
 	}
 
-	add_action( 'after_setup_theme', array( 'Mega_Menu', 'init' ), 5 );
+	if (!did_action('plugins_loaded')) {
+		add_action( 'plugins_loaded', array( 'Mega_Menu', 'init' ), 10 );
+	} else {
+		Mega_Menu::init();
+	}
 
 endif;
 

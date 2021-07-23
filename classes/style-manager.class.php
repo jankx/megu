@@ -896,7 +896,6 @@ if ( ! class_exists( 'Mega_Menu_Style_Manager' ) ) :
 			wp_enqueue_style( 'dashicons' );
 
 			do_action( 'megamenu_enqueue_public_scripts' );
-
 		}
 
 		/**
@@ -905,7 +904,6 @@ if ( ! class_exists( 'Mega_Menu_Style_Manager' ) ) :
 		 * @since 1.0
 		 */
 		public function enqueue_scripts() {
-
 			wp_enqueue_script( 'hoverIntent' );
 
 			$js_path = MEGAMENU_BASE_URL . 'js/maxmegamenu.js';
@@ -925,7 +923,7 @@ if ( ! class_exists( 'Mega_Menu_Style_Manager' ) ) :
 			//add_filter("megamenu_javascript_handle", "megamenu_script_handle");*/
 			$handle = apply_filters( 'megamenu_javascript_handle', 'megamenu' );
 
-			wp_enqueue_script( $handle, $js_path, $dependencies, MEGAMENU_VERSION, $scripts_in_footer );
+			wp_register_script( $handle, $js_path, $dependencies, MEGAMENU_VERSION, $scripts_in_footer );
 
 			// @todo: remove the following code in future update. Only here to prevent JS errors for users with
 			// cached versions of maxmegamenu.js
@@ -938,6 +936,8 @@ if ( ! class_exists( 'Mega_Menu_Style_Manager' ) ) :
 			);
 
 			wp_localize_script( $handle, 'megamenu', $params );
+
+			wp_enqueue_script($handle);
 		}
 
 
@@ -948,7 +948,6 @@ if ( ! class_exists( 'Mega_Menu_Style_Manager' ) ) :
 		 * @since 1.6.1
 		 */
 		public function enqueue_fs_style() {
-
 			$upload_dir = wp_upload_dir();
 
 			$filename = $this->get_css_filename();

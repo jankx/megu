@@ -4,6 +4,7 @@ namespace Jankx\Megu;
 use Jankx\Megu\Constracts\Extension;
 use Jankx\Megu\Extensions\Vertical\VerticalMenu;
 use Jankx\Megu\Extensions\IconFonts\ThemeIconFonts;
+use Jankx\Megu\Integration\Elementor;
 
 class Megu
 {
