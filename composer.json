@@ -10,7 +10,9 @@
       "email": "puleeno@gmail.com"
     }
   ],
-  "require": {},
+  "require": {
+    "jankx/core": "*"
+  },
   "autoload": {
     "psr-4": {
       "Jankx\\Megu\\": "src/"

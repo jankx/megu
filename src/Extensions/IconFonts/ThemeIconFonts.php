@@ -2,8 +2,7 @@
 namespace Jankx\Megu\Extensions\IconFonts;
 
 use Jankx\Megu\Abstracts\Extension;
-use Jankx\Megu\Abstracts\FontIconGenerator;
-use Jankx\Megu\Extensions\IconFonts\Generator\Fontastic;
+use Jankx\IconFonts\GeneratorManager;
 
 class ThemeIconFonts extends Extension
 {
@@ -20,31 +19,9 @@ class ThemeIconFonts extends Extension
     {
         if (is_admin()) {
             if (wp_is_request('ajax') && isset($_REQUEST['action']) && $_REQUEST['action'] === 'mm_get_lightbox_html') {
-                $generator_classes = apply_filters('jankx_megu_icon_font_generators', array(
-                    Fontastic::class,
-                ));
-                foreach ($generator_classes as $generator_class) {
-                    $generator = new $generator_class();
-                    if (!is_a($generator, FontIconGenerator::class)) {
-                        continue;
-                    }
-                    array_push($this->generators, $generator);
-                }
+                GeneratorManager::loadGenerators();
             }
             add_action('jankx/icon/fonts/new', array($this, 'integrateCoreIconFont'), 10, 4);
-        }
-    }
-
-    protected function detectGenerator($font_name, $path, $font_family)
-    {
-        foreach ($this->generators as $generator) {
-            $generator->setFontPath($path);
-            $generator->setFontName($font_name);
-            $generator->setFontFamily($font_family);
-
-            if ($generator->isMatched()) {
-                return $generator;
-            }
         }
     }
 
@@ -64,7 +41,7 @@ class ThemeIconFonts extends Extension
 
     public function integrateCoreIconFont($font_name, $path, $display_name, $font_family)
     {
-        $generator = $this->detectGenerator($font_name, $path, $font_family);
+        $generator = GeneratorManager::detectGenerator($font_name, $path, $font_family);
         if ($generator) {
             add_filter('megamenu_icon_tabs', function ($tabs) use ($generator, $display_name) {
                 $font_family = $generator->getFontFamily();
