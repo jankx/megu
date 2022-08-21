@@ -26,7 +26,7 @@ class VerticalMenu extends Extension
         add_filter('megamenu_nav_menu_css_class', array( $this, 'accordionKeepParentsOpen' ), 10, 3);
 
         if (apply_filters('jankx_megu_enable_vertical_menu_item', false)) {
-            add_filter('jankx_site_layout_menu_items', array($this, 'registerVerticalMenuItem'));
+            add_filter('jankx/layout/site/menu/itemtypes', array($this, 'registerVerticalMenuItem'));
             if (!apply_filters('jankx_megu_enable_custom_vertical_menu', false)) {
                 add_filter('nav_menu_item_title', array($this, 'renderVerticalMenuItem'), 10, 4);
             }
